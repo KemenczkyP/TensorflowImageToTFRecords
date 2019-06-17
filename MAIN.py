@@ -32,6 +32,15 @@ for idx in range(10):
                                          data_to_add_value = 0.22*idx, #example_value
                                          type_ = "float")
     example = TFEC.FeatureDict2TfExample(feature_dict)
+    #The feature_dict (and example) contains 2+dimension_number fields about the image:
+    #   'image/encoded' - bit encoded image data
+    #   'image/dim_size' - number of dimensions (for example it is 1)
+    #   'image/1D_' - size of the first dimension
+    #   'image/2D_' - size of the second dimension (if exists)
+    #   'image/3D_' - size of the 3rd dimension (if exists)
+    #   'image/4D_' - size of the 4th dimension (if exists)
+    #   ...
+    
     
     
     #-----------------------------WRITE TFRECORDS-----------------------------#
