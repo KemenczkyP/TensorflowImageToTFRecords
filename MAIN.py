@@ -14,17 +14,18 @@ import tensorflow as tf
 import TFFuncLib as TFEC
 
 #%% write TFRecord with image
+data_repos = '.\\numpy_data\\'
 
 TFRGenerator = TFEC.TFRecordGenerator.generate(path = "TFRecord_container",
                                                filename = "2019_06_13_try")
 for idx in range(10):
     #--------------------------------EXAMPLE INPUT----------------------------#
     A = np.array([idx*1.0, idx*2.0], dtype = np.float32) #the decode type have to be the same!!!
-    np.save('example_image' + str(idx) + '.npy', A)
+    np.save(data_repos + 'example_image' + str(idx) + '.npy', A)
     #--------------------------------EXAMPLE END------------------------------#
     
     #--------------------CREATE EXAMPLE FROM NUMPY ARRAY----------------------#
-    feature_dict = TFEC.ImageToTfFeature.create('example_image' + str(idx) + '.npy')
+    feature_dict = TFEC.ImageToTfFeature.create(data_repos + 'example_image' + str(idx) + '.npy')
     
     feature_dict = TFEC.AddFeatureToDict(feature_dict = feature_dict,
                                          data_to_add_key = "label",
