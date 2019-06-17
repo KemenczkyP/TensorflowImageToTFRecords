@@ -39,6 +39,8 @@ for idx in range(10):
     TFRGenerator.write(example, feature_dict)
 
 TFRGenerator.close()
+
+
 #%%
 #--------------------------------READ TFRECORD DATASET------------------------#
 TFRecReader = TFEC.TFRecordReader.read_keys(path = "TFRecord_container",
@@ -48,13 +50,14 @@ dataset = TFRecReader.get_dataset()
 
 #------------------------CALL THE EXAMPLES FROM THE DATASET-------------------#
 #(NO ITERATOR ANYMORE!)
-dataset = dataset.repeat(3)         #epoch_size
-dataset = dataset.shuffle(10000)    #shuffle_buffer_size
+dataset = dataset.repeat(100)         #epoch_size
+dataset = dataset.shuffle(100)    #shuffle_buffer_size
 dataset = dataset.batch(5)          #batch size
 dataset = dataset.prefetch(1)       #buffer_size
+
 for serialized_examples in dataset:
     parsed = TFRecReader.parse_examples(serialized_examples)
     image =  tf.io.decode_raw(parsed['image/encoded'],
                               out_type=tf.float32, #the decode type have to be the same as the input type!!!
                               little_endian=True)
-    #print(image.numpy())
+    
