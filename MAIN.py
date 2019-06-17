@@ -40,7 +40,8 @@ for idx in range(10):
     #   'image/3D_' - size of the 3rd dimension (if exists)
     #   'image/4D_' - size of the 4th dimension (if exists)
     #   ...
-    
+    #And in this case 1 additional field
+    #   'label' - defined in the 30th row in the code
     
     
     #-----------------------------WRITE TFRECORDS-----------------------------#
